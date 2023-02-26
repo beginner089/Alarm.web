@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>音割れ目覚まし</title>
+  <link rel="stylesheet" href="alarm.css">
+  <meta name="description" content="音割れ目覚まし！">
+</head>
+<body>
+
+<div class="alarm-clock"></div>
+<div class="title">
+<h1 class="fade_1">音割れ目覚まし</h1>
+<p>！音量注意！</p>
+<p class="fade_2">～音割れで目覚めの良い朝を～</p>
+</div>
+
+<div class="alarm-clock">
+  <table borde="0">
+      <tr><th></th></tr>
+      <tr>
+          <th style="text-align:center">
+              <div class="digital-clock">
+                  <span class="clock-hour"></span>:<span class="clock-min"></span>:<span class="clock-sec"></span>
+              </div>
+          </th>
+      </tr>
+      <tr class="set"><th>Set Alarm</th></tr>
+      <tr>
+          <th>
+              <select class="alarm-hour"></select>
+              <select class="alarm-min"></select>
+              <select class="alarm-sec"></select>
+          </th>
+      </tr>
+      <tr>
+          <th>
+              <input id="btnSet" type="button" value="Set" />
+              <input id="btnReset" type="button" value="Reset" />
+          </th>
+      </tr>
+      <tr>
+          <th>
+              
+              <select class="alarm-sound">
+                  <option value=" 振動音.MP3">振動音</option>
+                  <option value="笑い声.MP3" selected="selected">笑い声</option>
+                  <option value="環境.MP3">環境音</option>
+                  <option value="歓声.MP3">歓声</option>
+                  <option value="チャイム.MP3">チャイム</option>
+                  <option value="エンジン音.MP3">エンジン音</option>
+                  <option value="BGM3.MP3">BGM3</option>
+                  <option value="BGM_2.MP3">BGM2</option>
+                  <option value="BGM_1,MP3">BGM1</option>
+              </select>
+          </th>
+      </tr>
+  </table>
+</div>
+
+<audio id="alarm-sound" class="alarm-sound" loop="loop">
+  <source id="alarm-sound-source" src="●●●/wake-up-sound.mp3" type="audio/mp3" />
+</audio>
+  
+
+<h1>！！！音量！！！<br>！！！注意！！！</h1>
+
+  <p class="otoware">音割れ一覧</p>
+
+  <!--音声 -->
+    <h3 class="Simple"  >環 境 音<br>↓
+    </h3>
+    <div class="div"><audio class="audio" controls src="環境.MP3"  type="audio/MP3"> </audio></div>
+    
+    <h3 class="Simple">振 動 音 <br>↓</h3>
+    <div class="div"><audio class="audio" controls src="振動音.MP3"  type="audio/MP3"> </audio></div>
+
+    <h3 class="Simple">エ ン ジ ン 音 <br>↓</h3>
+    <div class="div"><audio class="audio" controls src="エンジン音.MP3"  type="audio/MP3"> </audio></div>
+
+    <h3 class="Simple">歓 声 <br>↓</h3>
+    <div class="div"><audio class="audio" controls src="歓声 (2).MP3"  type="audio/MP3"> </audio></div>
+
+    <h3 class="Simple">授 業 チ ャ イ ム <br>↓</h3>
+    <div class="div"><audio class="audio" controls src="チャイム.MP3"  type="audio/MP3"> </audio></div>
+
+    <h3 class="Simple">B G M 1 <br>↓</h3>
+    <div class="div"><audio class="audio" controls src="BGM_1.MP3"  type="audio/MP3"> </audio></div>
+
+    <h3 class="Simple">B G M 2 <br>↓</h3>
+    <div class="div"><audio class="audio" controls src="BGM_2.MP3"  type="audio/MP3"> </audio></div>
+
+    <h3 class="Simple">B G M 3 <br>↓</h3>
+    <div class="div"><audio class="audio" controls src="BGM3.MP3"  type="audio/MP3"> </audio></div>
+
+    <h3 class="Simple">笑 い 声 <br>↓</h3>
+    <div class="div"><audio class="audio" controls src="笑い声.MP3"  type="audio/MP3"> </audio></div>
+  <!--ここまで--> 
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.slim.min.js" ></script>
+  <script type="text/javascript">
+  
+      
+$(function () {
+    clock.init();  
+});
+
+
+var clock = {
+    
+    init: function () {
+        
+        clock.hour = $('.clock-hour')[0];
+        clock.min = $('.clock-min')[0];
+        clock.sec = $('.clock-sec')[0];
+
+        
+        clock.selectHour = $('.alarm-hour')[0];
+        clock.createOption(clock.selectHour, 23);
+        clock.selectMin = $('.alarm-min')[0];
+        clock.createOption(clock.selectMin, 59);
+        clock.selectSec = $('.alarm-sec')[0];
+        clock.createOption(clock.selectSec, 59);
+
+        
+        clock.buttonSet = $('#btnSet')[0];
+        $(clock.buttonSet).click(clock.set);
+        clock.buttonReset = $('#btnReset')[0];
+        $(clock.buttonReset).click(clock.reset);
+
+        
+        clock.sound = document.getElementById('alarm-sound');  
+        clock.soundSource = document.getElementById('alarm-sound-source');  
+        clock.alarmSound = $('.alarm-sound')[0];
+        clock.soundSource.src = clock.alarmSound.value;
+        clock.sound.load();
+
+        
+        clock.alarm = null;
+        setInterval(clock.tick, 1000);
+    },
+
+    
+    createOption: function (selector, max) {
+        for (var i = 0; i <= max; i++) {
+            i = clock.padZero(i);
+            $(selector).append($('<option>',
+                {
+                    value: i,
+                    text: i
+                }
+            ));
+        }
+    },
+
+    
+    padZero: function (num) {
+        if (num < 10) {
+            num = '0' + num;
+        }
+        else {
+            num = num.toString();
+        }
+        return num;
+    },
+
+    
+    tick: function () {
+        
+        var now = new Date();
+        var hr = clock.padZero(now.getHours());
+        var min = clock.padZero(now.getMinutes());
+        var sec = clock.padZero(now.getSeconds());
+
+        
+        clock.hour.innerHTML = hr;
+        clock.min.innerHTML = min;
+        clock.sec.innerHTML = sec;
+
+        
+        if (clock.alarm != null) {
+            now = hr + min + sec;
+            if (now == clock.alarm) {
+                if (clock.sound.paused) {
+                    clock.sound.play();
+                }
+            }
+        }
+    },
+
+    // SET ALARM
+    set: function () {
+        clock.alarm = clock.selectHour.value + clock.selectMin.value + clock.selectSec.value;
+        clock.soundSource.src = clock.alarmSound.value;
+        clock.sound.load();
+        clock.selectHour.disabled = true;
+        clock.selectMin.disabled = true;
+        clock.selectSec.disabled = true;
+        clock.buttonSet.disabled = true;
+        clock.buttonReset.disabled = false;
+        clock.alarmSound.disabled = true;
+    },
+
+    // RESET ALARM
+    reset: function () {
+        if (!clock.sound.paused) {
+            clock.sound.pause();
+        }
+        clock.alarm = null;
+        clock.selectHour.disabled = false;
+        clock.selectMin.disabled = false;
+        clock.selectSec.disabled = false;
+        clock.buttonSet.disabled = false;
+        clock.buttonReset.disabled = true;
+        clock.alarmSound.disabled = false;
+    }
+};  
+</script>
+
+<script src="alarm.js"></script>
+</body>
+</html>

@@ -1,0 +1,156 @@
+body{
+  background-color: rgb(23, 23, 23);
+}
+
+.title{
+  color: rgb(157, 157, 157);
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  text-align: center;
+  font-size: 33px;
+  
+}
+
+h1{
+  color: rgb(157, 157, 157);
+  font-size: 55px;
+  text-align: center;
+}
+
+p{
+  color: rgb(157, 157, 157);
+  font-size: 25px;
+  text-align: center;
+  position:relative;
+}
+
+.fade_1{
+  animation-name: fadein;
+  animation-duration: 3s;
+  animation-fill-mode:both;
+  opacity: 0;
+}
+
+@keyframes fadein{
+  form {
+    opacity: 0;
+  }
+
+  to{
+    opacity: 1;
+  }
+}
+
+
+.fade_2{
+  animation-name: fadein;
+  animation-duration: 3s;
+  animation-fill-mode:both;
+  border-bottom: 5px solid rgb(157, 157, 157);
+  opacity: 0;
+}
+
+@keyframes fadein{
+  form {
+    opacity: 0;
+  }
+
+  to{
+    opacity: 1;
+  }
+}
+
+.otoware{
+  color: rgb(157,157,157);
+  font-size: 50px;
+  text-align: center;
+}
+
+.Simple{
+  text-align: center;
+  color: rgb(157,157,157);
+  margin: 0 0 50px 0;
+  font-size: 30px;
+ 
+}
+
+.div{
+  text-align: center;
+  margin-top: 1%;
+  
+}
+
+
+
+.alarm-hour{
+  font-size: 35px;
+  border-radius: 50px;
+  background-color: rgb(23, 23, 23);
+  color: rgb(158, 158, 158);
+}
+
+.alarm-min{
+  font-size: 35px;
+  border-radius: 50px;
+  background-color: rgb(23, 23, 23);
+  color: rgb(158, 158, 158);
+}
+
+.alarm-sec{
+  font-size: 35px;
+  border-radius: 50px;
+  background-color: rgb(23, 23, 23);
+  color: rgb(158, 158, 158);
+}
+
+table {
+  position:absolute;
+  font-size: 70px;
+  color: rgb(158, 158, 158);
+  position:relative;
+  left: 130px;
+  font-family: Arial;      
+  text-transform: uppercase;
+  font-family:serif;
+}
+
+.set{
+  font-size: 30px;
+  position:absolute;
+  top: 120px;
+  left: 40px;
+}
+
+#btnSet{
+  font-size: 30px;
+  position:absolute;
+  top: 243px;
+  left: 30px;
+  border-radius: 13px;
+  background-color: rgb(23, 23, 23);
+  color: rgb(158, 158, 158);
+}
+
+#btnReset{
+  font-size: 30px;
+  position:absolute;
+  left: 140px;
+  border-radius: 30px;
+  background-color: rgb(23, 23, 23);
+  color: rgb(158, 158, 158);
+}
+
+
+.alarm-sound{
+  font-size: 31px;
+  border-radius: 13px;
+  background-color: rgb(23, 23, 23);
+  color: rgb(158, 158, 158);
+}
+
+div.digital-clock {
+  background-color: rgb(23, 23, 23);
+    color: rgb(158, 158, 158);
+    border: 1px solid #ffffff;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+}
